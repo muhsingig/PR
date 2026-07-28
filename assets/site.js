@@ -317,6 +317,67 @@ const CONTACT = {
     });
   }
 
+  /* --------------------------------------------------------
+     7. Interactive Walking Black Cat with Green Eyes
+        Spawns a walking cat across the screen when clicking on "pavitra"
+  -------------------------------------------------------- */
+  function initWalkingCat() {
+    function spawnCat() {
+      document.querySelectorAll('.walking-cat-runner').forEach(function (el) { el.remove(); });
+
+      var runner = document.createElement('div');
+      runner.className = 'walking-cat-runner';
+      runner.setAttribute('aria-hidden', 'true');
+
+      runner.innerHTML =
+        '<svg viewBox="0 0 140 84" width="140" height="84" class="walking-cat-svg">' +
+          '<g class="cat-body-wrap">' +
+            '<path class="cat-tail-path" d="M 24 38 C 10 24 4 8 14 4" fill="none" stroke="#1d1918" stroke-width="5" stroke-linecap="round" />' +
+            '<g class="cat-leg-back-right"><path d="M 38 48 L 30 74 L 24 74" fill="none" stroke="#12100f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" /></g>' +
+            '<g class="cat-leg-front-right"><path d="M 92 48 L 84 74 L 78 74" fill="none" stroke="#12100f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" /></g>' +
+            '<ellipse cx="62" cy="42" rx="36" ry="20" fill="#1d1918" />' +
+            '<g class="cat-leg-back-left"><path d="M 44 48 L 52 74 L 58 74" fill="none" stroke="#1d1918" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" /></g>' +
+            '<g class="cat-leg-front-left"><path d="M 98 48 L 106 74 L 112 74" fill="none" stroke="#1d1918" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" /></g>' +
+            '<circle cx="106" cy="30" r="15" fill="#1d1918" />' +
+            '<polygon points="96,18 100,4 108,16" fill="#1d1918" />' +
+            '<polygon points="108,16 114,4 118,18" fill="#1d1918" />' +
+            '<polygon points="98,17 101,8 106,15" fill="#ff9ebb" opacity="0.75" />' +
+            '<polygon points="109,15 113,8 116,17" fill="#ff9ebb" opacity="0.75" />' +
+            '<ellipse cx="104" cy="27" rx="3.5" ry="4.5" fill="#3be873" />' +
+            '<ellipse cx="114" cy="27" rx="3.5" ry="4.5" fill="#3be873" />' +
+            '<ellipse cx="104.5" cy="27" rx="1.1" ry="3.8" fill="#0d0c0b" />' +
+            '<ellipse cx="114.5" cy="27" rx="1.1" ry="3.8" fill="#0d0c0b" />' +
+            '<circle cx="103" cy="25" r="1" fill="#ffffff" />' +
+            '<circle cx="113" cy="25" r="1" fill="#ffffff" />' +
+            '<polygon points="108,32 111,32 109.5,34" fill="#ff9ebb" />' +
+            '<path d="M 113 33 L 130 30 M 113 35 L 128 36 M 100 33 L 84 30 M 100 35 L 86 36" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1" />' +
+          '</g>' +
+        '</svg>';
+
+      document.body.appendChild(runner);
+
+      setTimeout(function () {
+        if (runner && runner.parentNode) runner.remove();
+      }, 4200);
+    }
+
+    document.addEventListener('click', function (e) {
+      var node = e.target;
+      while (node && node !== document) {
+        var text = (node.textContent || node.innerText || '').toLowerCase();
+        if (
+          text.includes('pavitra') ||
+          (node.classList && (node.classList.contains('signature') || node.classList.contains('pavitra-trigger'))) ||
+          node.dataset.pavitra !== undefined
+        ) {
+          spawnCat();
+          break;
+        }
+        node = node.parentElement;
+      }
+    }, true);
+  }
+
   /* -------------------------------------------------------- */
   function boot() {
     applyContact();
@@ -327,6 +388,7 @@ const CONTACT = {
     initReveal();
     initImgFallback();
     initForm();
+    initWalkingCat();
   }
 
   if (document.readyState === 'loading') {

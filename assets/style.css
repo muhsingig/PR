@@ -181,8 +181,12 @@ img { display: block; max-width: 100%; }
   line-height: 1;
   color: var(--ink);
   z-index: 6;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.25s var(--ease);
 }
+.signature:hover { transform: translate(-50%, -50%) scale(1.04); }
 .signature .lily-mark { color: var(--accent); width: 0.72em; height: 0.72em; }
 
 .tagline {
@@ -1013,6 +1017,12 @@ img { display: block; max-width: 100%; }
 }
 .stills .shot:hover { transform: rotate(0deg) scale(1.02); box-shadow: var(--lift); }
 .stills .shot .slot { aspect-ratio: var(--ar, 1 / 1.2); }
+.stills .shot .slot img {
+  filter: none;
+  opacity: 1;
+  mix-blend-mode: normal;
+  object-fit: cover;
+}
 .stills .shot .cap {
   position: absolute;
   left: 0; right: 0;
@@ -1239,11 +1249,13 @@ img { display: block; max-width: 100%; }
 }
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE (Mobile-first polish)
    ============================================================ */
-/* Below the width the absolute collage needs, it becomes a scrapbook column.
-   (A transform: scale() would not work here — it shrinks the paint, not the
-   layout box, so the 1040px stage would still push the page sideways.) */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 @media (max-width: 1080px) {
   .home { display: block; padding: 48px 24px 64px; }
   .stage {
@@ -1296,15 +1308,25 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 860px) {
-  .stage { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 58px 18px; }
-  .scatter { gap: 44px 28px; }
+  .stage { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 52px 18px; }
+  .scatter { gap: 40px 24px; }
   .scatter > * { flex: 0 0 260px; margin-top: 0 !important; }
-  .stills { columns: 2; }
-  .nav { padding: 24px 22px 0; }
-  .nav__links { gap: 16px; }
-  .nav a { font-size: 13px; }
-  .page { padding: 44px 22px 30px; }
-  .foot { padding: 26px 22px 34px; }
+  .stills { columns: 2; column-gap: 20px; }
+  .nav { padding: 22px 20px 0; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .nav__links {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+  .nav__links::-webkit-scrollbar { display: none; }
+  .nav a { font-size: 13.5px; flex-shrink: 0; }
+  .page { padding: 38px 20px 30px; }
+  .foot { padding: 26px 20px 34px; }
   /* photos stop floating and become a 2-up grid under the text */
   .about-wrap {
     min-height: 0;
@@ -1326,49 +1348,135 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 720px) {
-  .home { padding: 40px 18px 56px; }
-  .stage { gap: 52px 14px; }
-  .signature { font-size: clamp(32px, 11vw, 46px); }
+  .home { padding: 36px 16px 52px; }
+  .stage { gap: 46px 12px; }
+  .signature { font-size: clamp(30px, 9.5vw, 44px); }
   .tagline { font-size: 15px; margin-bottom: 12px; }
-  .pin__tag { bottom: -24px; font-size: 19px; }
+  .pin__tag { bottom: -24px; font-size: 18px; }
 
   /* shrink the objects themselves — transforms don't change layout size */
-  .film     { width: 84px; }
-  .note-obj { width: 148px; }
-  .polaroid { width: 138px; }
-  .phone    { width: 92px; }
-  .papers   { width: 124px; }
-  .sticky   { width: 118px; }
-  .stamp    { width: 96px; }
+  .film     { width: 80px; }
+  .note-obj { width: 140px; }
+  .polaroid { width: 132px; }
+  .phone    { width: 88px; }
+  .papers   { width: 118px; }
+  .sticky   { width: 112px; }
+  .stamp    { width: 92px; }
   /* the disc overhangs the sleeve, so it has to shrink with it */
-  .record   { width: 112px; }
-  .record__disc { width: 94px; right: -22px; top: 10px; }
-  .record__play { border-left-width: 16px; border-top-width: 10px; border-bottom-width: 10px; }
-  .mug      { width: 96px; padding-right: 18px; }
-  .pressed  { width: 152px; padding: 18px 12px 11px; }
-  .polaroid__cap { font-size: 17px; }
+  .record   { width: 104px; }
+  .record__disc { width: 88px; right: -20px; top: 9px; }
+  .record__play { border-left-width: 15px; border-top-width: 9px; border-bottom-width: 9px; }
+  .mug      { width: 90px; padding-right: 16px; }
+  .pressed  { width: 144px; padding: 16px 11px 10px; }
+  .polaroid__cap { font-size: 16px; }
 
   .stills { columns: 1; }
+  .stills .shot { margin-bottom: 24px; }
   .scatter > * { flex: 1 1 100%; max-width: 320px; }
   .foot { flex-direction: column; align-items: center; text-align: center; gap: 14px; }
   .form input, .form textarea { font-size: 16px; }  /* stop iOS zoom */
-  .board { height: 620px; }
+  .board { height: 580px; }
 }
 
 @media (max-width: 560px) {
-  .nav { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .home { padding: 24px 12px 40px; }
+  .stage { gap: 38px 10px; }
+  .nav { padding: 16px 14px 0; }
   .nav__links { gap: 14px; }
 
   /* a rotated box is wider than its element, which overflows a narrow
      column — so trim the widest objects (tilt is already eased above) */
   .film     { width: 72px; }
-  .note-obj { width: 130px; }
-  .pressed  { width: 138px; }
-  .polaroid { width: 128px; }
-  .sticky   { width: 108px; }
-  .papers   { width: 112px; }
-  .record   { width: 94px; }
-  .record__disc { width: 78px; right: -17px; top: 8px; }
-  .mug      { width: 86px; padding-right: 16px; }
-  .pin__tag { font-size: 17px; bottom: -22px; }
+  .note-obj { width: 124px; }
+  .pressed  { width: 128px; }
+  .polaroid { width: 120px; }
+  .sticky   { width: 104px; }
+  .papers   { width: 106px; }
+  .record   { width: 90px; }
+  .record__disc { width: 74px; right: -15px; top: 7px; }
+  .mug      { width: 82px; padding-right: 14px; }
+  .pin__tag { font-size: 16px; bottom: -20px; }
+}
+
+/* ============================================================
+   WALKING BLACK CAT ANIMATION (Green Eyes)
+   ============================================================ */
+.signature, [data-pavitra], .pavitra-trigger {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  user-select: none;
+}
+
+.walking-cat-runner {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  top: auto;
+  right: auto;
+  width: 140px;
+  height: 84px;
+  z-index: 999999;
+  pointer-events: none;
+  animation: catWalkAcross 4s linear forwards;
+}
+
+.walking-cat-svg {
+  display: block;
+  width: 140px;
+  height: 84px;
+  filter: drop-shadow(0 6px 12px rgba(61, 26, 46, 0.35));
+}
+
+.cat-body-wrap {
+  transform-origin: center bottom;
+  animation: catBodyBob 0.3s ease-in-out infinite alternate;
+}
+
+.cat-tail-path {
+  transform-origin: 24px 38px;
+  animation: catTailMove 1s ease-in-out infinite alternate;
+}
+
+.cat-leg-back-left, .cat-leg-front-right {
+  transform-origin: 44px 48px;
+  animation: catLegStepA 0.3s ease-in-out infinite alternate;
+}
+
+.cat-leg-back-right, .cat-leg-front-left {
+  transform-origin: 92px 48px;
+  animation: catLegStepB 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes catWalkAcross {
+  0% {
+    transform: translateX(-150px);
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(100vw + 60px));
+    opacity: 0;
+  }
+}
+
+@keyframes catBodyBob {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
+}
+
+@keyframes catTailMove {
+  0%   { transform: rotate(-12deg); }
+  100% { transform: rotate(22deg); }
+}
+
+@keyframes catLegStepA {
+  0%   { transform: rotate(-28deg); }
+  100% { transform: rotate(28deg); }
+}
+
+@keyframes catLegStepB {
+  0%   { transform: rotate(28deg); }
+  100% { transform: rotate(-28deg); }
 }
