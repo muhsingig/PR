@@ -9,6 +9,7 @@
 const CONTACT = {
   email:     'hello@pavitrarajpal.com',                            // TODO: your real email
   instagram: 'https://instagram.com/pavitrarajpal',                // TODO: your real handle
+  youtube:   'https://youtube.com/@pavitrarajpal',                 // TODO: your real channel
   tiktok:    'https://tiktok.com/@pavitrarajpal',                  // TODO: your real handle
   linkedin:  'https://www.linkedin.com/in/pavitra-rajpal-926125325'
 };
@@ -47,6 +48,16 @@ const CONTACT = {
     if (!host) return;
 
     var full = host.dataset.type;
+
+    // she's a morning person — let the greeting know what time it is
+    if (host.dataset.greet !== undefined) {
+      var h = new Date().getHours();
+      var greeting = h < 12 ? 'good morning!'
+                   : h < 17 ? 'good afternoon!'
+                   : h < 22 ? 'good evening!'
+                            : 'up late too?';
+      full = greeting + ' ' + full;
+    }
     var caret = document.createElement('span');
     caret.className = 'caret';
     caret.textContent = '|';
@@ -227,10 +238,59 @@ const CONTACT = {
   }
 
   /* --------------------------------------------------------
+     4c. Music: lite YouTube embeds
+         The sleeve is just paper until it is clicked. Only then
+         does an iframe get created, so no YouTube script runs and
+         no cookies are set for visitors who never press play.
+         Uses youtube-nocookie.com even after that.
+  -------------------------------------------------------- */
+  function initMusic() {
+    var sleeves = document.querySelectorAll('.sleeve[data-yt]');
+    if (!sleeves.length) return;
+
+    sleeves.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.dataset.yt;
+        if (!id || btn.classList.contains('is-playing')) return;
+
+        // stop whatever else is playing — one track at a time
+        document.querySelectorAll('.sleeve.is-playing').forEach(function (other) {
+          if (other !== btn) resetSleeve(other);
+        });
+
+        var wrap = document.createElement('span');
+        wrap.className = 'sleeve__frame';
+
+        var frame = document.createElement('iframe');
+        frame.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
+                    '?autoplay=1&rel=0&modestbranding=1';
+        frame.title = btn.getAttribute('aria-label') || 'Cover';
+        frame.allow = 'accelerometer; encrypted-media; picture-in-picture';
+        frame.setAttribute('allowfullscreen', '');
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+
+        wrap.appendChild(frame);
+        btn.dataset.sleeveHtml = btn.innerHTML;   // keep the paper sleeve to restore
+        btn.innerHTML = '';
+        btn.appendChild(wrap);
+        btn.classList.add('is-playing');
+      });
+    });
+
+    function resetSleeve(btn) {
+      if (!btn.dataset.sleeveHtml) return;
+      btn.innerHTML = btn.dataset.sleeveHtml;     // kills the iframe, stops the audio
+      btn.classList.remove('is-playing');
+    }
+  }
+
+  /* --------------------------------------------------------
      5. Missing photos degrade to the paper placeholder
   -------------------------------------------------------- */
   function initImgFallback() {
-    document.querySelectorAll('.slot img').forEach(function (img) {
+    // .sleeve__art is a YouTube thumbnail — a mistyped video id would
+    // otherwise leave a broken-image icon on the sleeve
+    document.querySelectorAll('.slot img, .sleeve__art').forEach(function (img) {
       img.addEventListener('error', function () { img.remove(); });
       if (img.complete && img.naturalWidth === 0) img.remove();
     });
@@ -263,6 +323,7 @@ const CONTACT = {
     typewriter();
     initDrag();
     initPetals();
+    initMusic();
     initReveal();
     initImgFallback();
     initForm();

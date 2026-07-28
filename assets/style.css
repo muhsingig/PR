@@ -326,8 +326,8 @@ img { display: block; max-width: 100%; }
    ============================================================ */
 
 /* every object is a positioned block so its ::before/::after and tag anchor to it */
-.film, .note-obj, .notebook, .polaroid, .pressed,
-.phone, .papers, .papers .sheet, .sticky, .stamp {
+.film, .note-obj, .notebook, .polaroid, .pressed, .record, .record__sleeve,
+.mug, .mug__cup, .pick, .phone, .papers, .papers .sheet, .sticky, .stamp {
   position: relative;
   display: block;
   isolation: isolate;
@@ -663,6 +663,211 @@ img { display: block; max-width: 100%; }
 /* both strips lie on the same diagonal, clipping opposite corners */
 .pressed__tape--a { top: -9px;    left: -17px;  transform: rotate(-38deg); }
 .pressed__tape--b { bottom: -9px; right: -17px; transform: rotate(-38deg); }
+
+/* ---- 10. record sleeve, vinyl peeking out ------------------- */
+.record { width: 152px; }
+.record__disc {
+  position: absolute;
+  z-index: 0;
+  right: -30px;
+  top: 14px;
+  width: 128px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #cf6382 0 13%, transparent 13.5%),
+    repeating-radial-gradient(circle, #241f27 0 2px, #302a33 2px 4px);
+  box-shadow: var(--rest);
+}
+.record__sleeve {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  background: linear-gradient(152deg, #fffcfd, #f7e6ec);
+  border: 1px solid #f0dde4;
+  box-shadow: var(--rest);
+}
+/* the play triangle from the album-sleeve reference */
+.record__play, .sleeve__play {
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  border-left: 21px solid var(--ink);
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+  transition: border-left-color 0.3s var(--ease);
+}
+
+/* ---- 11. coffee mug ----------------------------------------- */
+.mug { width: 108px; padding-right: 20px; }
+.mug__cup {
+  position: relative;
+  height: 78px;
+  background: linear-gradient(180deg, #fffcfd, #f6e6eb);
+  border: 2.5px solid var(--ink);
+  border-radius: 5px 5px 30px 30px;
+}
+.mug__cup::before {                 /* the coffee */
+  content: "";
+  position: absolute;
+  left: 7px; right: 7px; top: 6px;
+  height: 10px;
+  border-radius: 50%;
+  background: #a9704f;
+}
+.mug__handle {
+  position: absolute;
+  right: -19px;
+  top: 20px;
+  width: 24px;
+  height: 30px;
+  border: 3px solid var(--ink);
+  border-left: 0;
+  border-radius: 0 15px 15px 0;
+}
+.mug__steam {
+  position: absolute;
+  left: 0; right: 20px;
+  top: -26px;
+  height: 24px;
+  background:
+    radial-gradient(circle at 38% 100%, transparent 60%, transparent 60%);
+}
+.mug__steam::before, .mug__steam::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 12px;
+  height: 22px;
+  border: 2.5px solid rgba(207, 99, 130, 0.55);
+  border-bottom: 0;
+  border-right: 0;
+  border-radius: 8px 0 0 0;
+}
+.mug__steam::before { left: 28%; transform: rotate(14deg); }
+.mug__steam::after  { left: 52%; transform: rotate(-10deg); }
+
+/* ---- 12. the cat, asleep on the paperwork ------------------- */
+.cat {
+  position: absolute;
+  z-index: 4;
+  top: -33px;
+  left: -12px;
+  width: 78px;
+  pointer-events: none;
+}
+.cat svg { width: 100%; height: auto; display: block; }
+.cat__eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: catBlink 7s steps(1, end) infinite;
+}
+@keyframes catBlink {
+  0%, 90%   { transform: scaleY(1); }
+  92%, 95%  { transform: scaleY(0.12); }
+  97%, 100% { transform: scaleY(1); }
+}
+
+/* ---- 13. coffee ring stained into the paper ----------------- */
+.ring {
+  position: absolute;
+  z-index: 0;
+  width: var(--r, 88px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 7px solid rgba(150, 95, 60, 0.13);
+  pointer-events: none;
+}
+.ring::after {                      /* a second, fainter pass */
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 2px solid rgba(150, 95, 60, 0.09);
+}
+
+/* ---- 14. guitar pick ---------------------------------------- */
+.pick { width: 50px; }
+.pick svg { width: 100%; height: auto; display: block; }
+
+/* ============================================================
+   MUSIC PAGE — lite YouTube embeds
+   Each sleeve is a button; site.js swaps in the real iframe on
+   click, so nothing loads from YouTube until you press play.
+   ============================================================ */
+.track { width: 100%; max-width: 300px; text-align: center;
+         transform: rotate(var(--rot, 0deg)); transition: transform 0.45s var(--ease); }
+.track:hover { transform: rotate(0deg) translateY(-6px); }
+
+.sleeve {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+}
+.sleeve__vinyl {
+  position: absolute;
+  z-index: 0;
+  right: -6px;
+  top: 8%;
+  width: 84%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #cf6382 0 13%, transparent 13.5%),
+    repeating-radial-gradient(circle, #241f27 0 2px, #302a33 2px 4px);
+  box-shadow: var(--rest);
+  transition: right 0.55s var(--ease), transform 0.55s var(--ease);
+}
+.sleeve:hover .sleeve__vinyl { right: -22px; }
+
+.sleeve__front {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: linear-gradient(152deg, #fffcfd, #f7e6ec);
+  border: 1px solid #f0dde4;
+  box-shadow: var(--rest);
+  transition: box-shadow 0.45s var(--ease);
+}
+.sleeve:hover .sleeve__front { box-shadow: var(--lift); }
+.sleeve__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sleeve__play {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 2px 6px rgba(61, 26, 46, 0.35));
+}
+.sleeve:hover .sleeve__play { border-left-color: var(--accent); }
+
+/* once playing, the sleeve is replaced by the iframe */
+.sleeve.is-playing { cursor: default; }
+.sleeve__frame { position: relative; z-index: 3; aspect-ratio: 16 / 9; }
+.sleeve__frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+.track__no {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: var(--accent);
+  margin-top: 16px;
+}
+.track__title { font-family: var(--mono); font-size: 20px; font-weight: 400; margin-top: 3px; }
+.track__note  { font-size: 13px; color: var(--ink-70); margin-top: 5px; }
 
 /* ============================================================
    HERBARIUM SPECIMEN CARDS  (interests page)
@@ -1082,6 +1287,11 @@ img { display: block; max-width: 100%; }
     /* counter-rotate so the label sits level under the tilted object */
     transform: translateX(-50%) rotate(calc(var(--rot, 0deg) * -0.4));
   }
+
+  /* the stage stops being a positioning context here, so these would
+     anchor to the page instead. They only read as marks on a large sheet
+     of paper anyway — drop them rather than scatter them. */
+  .ring, .stage > .pick { display: none; }
 }
 
 @media (max-width: 860px) {

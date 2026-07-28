@@ -19,6 +19,13 @@ Change them there and the whole site follows.
 | `--accent` | `#cf6382` | links, active nav, italics, the lily |
 | `--cream` | `#fdf1f4` | paper objects |
 
+The personal details are woven in rather than announced: a black cat with green
+eyes asleep on the paperwork (she blinks), coffee rings stained into the paper,
+a guitar pick, a mug, a record sleeve, a greeting that changes with the clock,
+and herbarium tags for cats, coffee, guitar and mornings alongside the work
+ones. The collage decorations are hidden below 1080px, where the stage stops
+being a positioning context.
+
 Where the lily shows up: the mark after "hi! i'm pavitra!" and in the footer,
 the section dividers, the favicon, a faint watermark inside every empty photo
 slot, the pressed-and-taped specimen on the home collage, and the herbarium
@@ -30,15 +37,21 @@ picks up the surrounding text colour) and `--lily-outline` (the watermark).
 
 | File | Nav label | What's on it |
 |---|---|---|
-| `index.html` | home | the collage — eight objects, each links somewhere |
+| `index.html` | home | the collage — nine objects, each linking somewhere |
 | `about.html` | about me | the long-form intro + draggable photos |
 | `stills.html` | stills | photo grid |
-| `work.html` | work | what I do (3 services) + selected work (4) |
+| `music.html` | music | guitar covers, played from YouTube |
+| `work.html` | work | what I do — the three services |
+| `projects.html` | projects | past projects + case studies |
 | `socials.html` | socials | social links + contact form |
-| `interests.html` | interests | the five interests |
+| `interests.html` | interests | nine herbarium specimen tags |
 | `professional.html` | professional | the CV page |
 
-## Three things to do before this goes live
+Every collage object goes somewhere different: film strip → stills, notebook →
+projects, sticky note → email, record sleeve → music, mug → work, polaroid →
+about, phone → socials, paper stack → professional, pressed lily → interests.
+
+## Before this goes live
 
 **1. Your contact details** — open `assets/site.js` and edit the `CONTACT`
 block at the very top. It's the only place they live; every page reads from it.
@@ -64,10 +77,25 @@ Until a file exists the site shows a neutral paper placeholder in its slot,
 so nothing looks broken while you gather them. Square-ish or portrait crops
 work best.
 
-**3. Your real projects** — `work.html`, the "Selected Work" section, currently
-has four placeholder cards (`campaign delivery`, `audience insight`,
-`brand narrative`, `platform strategy`). Swap the titles and one-line
-descriptions for real work. There's a `<!-- TODO -->` comment marking the spot.
+**3. Your real projects** — two places, both marked with `<!-- TODO -->`:
+`projects.html` has six placeholder cards (three past projects, three case
+studies), and `work.html`'s "Selected Work" section has four more. Swap the
+titles and one-line descriptions for real work.
+
+**4. Your cover videos** — `music.html` has four empty record sleeves. Each
+needs a YouTube **video id**: the eleven characters after `v=` in the watch URL
+(`youtube.com/watch?v=`**`dQw4w9WgXcQ`**). Put them in the `covers` list at the
+top of the music section. Until then a sleeve shows the play triangle and does
+nothing when clicked.
+
+Nothing loads from YouTube until a visitor actually presses play, and playback
+uses `youtube-nocookie.com` — so no tracking cookies are set for people who
+just browse. Starting one cover stops any other.
+
+**5. Confirm the job title.** The site says you moved from Ad Operations at
+JioHotstar into Digital Ad Sales. I didn't know the company for the current
+role, so `professional.html` names it without one — there's a `<!-- TODO -->`
+on that line.
 
 Optional: add your CV as `resume.pdf` in this folder — the "i prefer a pdf"
 button on `professional.html` already points at it.
