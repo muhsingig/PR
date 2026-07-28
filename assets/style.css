@@ -1083,8 +1083,9 @@ img { display: block; max-width: 100%; }
 }
 .quote p {
   font-family: var(--mono);
-  font-size: clamp(19px, 2.6vw, 26px);
-  line-height: 1.5;
+  /* sized for a short motto — a long one would want ~26px instead */
+  font-size: clamp(28px, 5vw, 46px);
+  line-height: 1.35;
 }
 .quote em { color: var(--accent); font-style: italic; }
 .quote .by {
@@ -1339,6 +1340,11 @@ img { display: block; max-width: 100%; }
   .papers   { width: 124px; }
   .sticky   { width: 118px; }
   .stamp    { width: 96px; }
+  /* the disc overhangs the sleeve, so it has to shrink with it */
+  .record   { width: 112px; }
+  .record__disc { width: 94px; right: -22px; top: 10px; }
+  .record__play { border-left-width: 16px; border-top-width: 10px; border-bottom-width: 10px; }
+  .mug      { width: 96px; padding-right: 18px; }
   .pressed  { width: 152px; padding: 18px 12px 11px; }
   .polaroid__cap { font-size: 17px; }
 
@@ -1361,5 +1367,8 @@ img { display: block; max-width: 100%; }
   .polaroid { width: 128px; }
   .sticky   { width: 108px; }
   .papers   { width: 112px; }
+  .record   { width: 94px; }
+  .record__disc { width: 78px; right: -17px; top: 8px; }
+  .mug      { width: 86px; padding-right: 16px; }
   .pin__tag { font-size: 17px; bottom: -22px; }
 }
