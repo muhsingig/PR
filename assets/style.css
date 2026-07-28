@@ -1,0 +1,1155 @@
+/* ============================================================
+   PAVITRA RAJPAL — portfolio
+   Scrapbook / cut-out collage, stargazer lily theme.
+   Blush paper, deep plum ink, stargazer pink accent.
+   ============================================================ */
+
+:root {
+  --paper:   #fdf9f8;
+  --ink:     #3d1a2e;
+  --ink-70:  rgba(61, 26, 46, 0.7);
+  --ink-45:  rgba(61, 26, 46, 0.45);
+  --accent:  #cf6382;   /* stargazer pink */
+  --line:    rgba(61, 26, 46, 0.16);
+  --cream:   #fdf1f4;
+
+  --mono: "Cutive Mono", "Courier New", monospace;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --hand: "Caveat", "Segoe Script", cursive;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --lift: 0 18px 34px rgba(61, 26, 46, 0.16), 0 3px 8px rgba(61, 26, 46, 0.08);
+  --rest: 0 8px 18px rgba(61, 26, 46, 0.11), 0 2px 4px rgba(61, 26, 46, 0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+::selection { background: #f7dde5; color: var(--ink); }
+
+/* ------------------------------------------------------------
+   SHARED TYPE
+------------------------------------------------------------ */
+.label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.page-title {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.page-sub {
+  max-width: 460px;
+  margin: 10px auto 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-70);
+}
+
+.hand { font-family: var(--hand); }
+
+/* ------------------------------------------------------------
+   NAVIGATION  (subpages only — the home collage has none)
+------------------------------------------------------------ */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 34px 40px 0;
+}
+
+.nav__links { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+
+.nav a {
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  transition: color 0.25s var(--ease);
+}
+.nav a:hover        { color: var(--accent); }
+.nav a[aria-current] { color: var(--accent); }
+
+.nav__toggle { display: none; }
+
+/* ------------------------------------------------------------
+   PAGE SHELL
+------------------------------------------------------------ */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 40px 40px;
+  min-height: calc(100vh - 190px);
+}
+
+.section-label {
+  margin: 0 0 14px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* hairline — lily — hairline */
+.rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: auto;
+  height: auto;
+  margin: 46px auto;
+  background: none;
+  border: 0;
+}
+.rule::before, .rule::after {
+  content: "";
+  width: 56px;
+  height: 1px;
+  background: var(--line);
+}
+.rule .lily-mark { width: 15px; height: 15px; color: var(--accent); }
+
+/* ------------------------------------------------------------
+   FOOTER
+------------------------------------------------------------ */
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 40px 40px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.foot__links { display: flex; gap: 28px; flex-wrap: wrap; }
+.foot__links a { transition: color 0.25s var(--ease); }
+.foot__links a:hover { color: var(--accent); }
+.foot__links .arw { font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
+
+/* ============================================================
+   HOME — the collage
+   ============================================================ */
+.home { min-height: 100vh; display: grid; place-items: center; padding: 30px 20px; }
+
+.stage {
+  position: relative;
+  width: 1040px;
+  max-width: 100%;
+  height: 720px;
+}
+
+/* centre block --------------------------------------------- */
+.signature {
+  position: absolute;
+  left: 50%;
+  top: 300px;
+  transform: translate(-50%, -50%);
+  width: min(560px, 78%);
+  text-align: center;
+  font-family: var(--hand);
+  font-weight: 500;
+  font-size: clamp(44px, 6.4vw, 82px);
+  line-height: 1;
+  color: var(--ink);
+  z-index: 6;
+  pointer-events: none;
+}
+.signature .lily-mark { color: var(--accent); width: 0.72em; height: 0.72em; }
+
+.tagline {
+  position: absolute;
+  left: 50%;
+  top: 396px;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 92vw;
+  font-family: var(--mono);
+  font-size: 19px;
+  color: var(--ink);
+  z-index: 6;
+  pointer-events: none;
+}
+.caret {
+  display: inline-block;
+  animation: blink 1.05s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* scattered objects ----------------------------------------- */
+.pin {
+  position: absolute;
+  display: block;
+  cursor: pointer;
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.5s var(--ease), filter 0.5s var(--ease);
+  will-change: transform;
+  z-index: 2;
+  animation: pinIn 0.9s var(--ease) both;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes pinIn {
+  from { opacity: 0; transform: rotate(var(--rot, 0deg)) translateY(22px) scale(0.94); }
+}
+.pin:hover, .pin:focus-visible {
+  transform: rotate(calc(var(--rot, 0deg) * 0.25)) translateY(-8px) scale(1.045);
+  z-index: 9;
+  outline: none;
+}
+.pin.is-dragging { transition: none; z-index: 20; cursor: grabbing; }
+
+/* the little handwritten tag under each object */
+.pin__tag {
+  position: absolute;
+  left: 50%;
+  bottom: -30px;
+  transform: translateX(-50%);
+  font-family: var(--hand);
+  font-size: 23px;
+  white-space: nowrap;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+}
+.pin:hover .pin__tag, .pin:focus-visible .pin__tag { opacity: 1; }
+
+/* ============================================================
+   THE LILY
+   One silhouette, used as a mask so it always takes currentColor,
+   and one faint outline used as the empty-photo watermark.
+   ============================================================ */
+:root {
+  /* rounder, wider petals than the big illustrations — a pointed stargazer
+     silhouette reads as a star, not a flower, at 12px */
+  --lily-solid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-50 -50 100 100'%3E%3Cg%3E%3Cpath d='M0 4C16-8 18-26 0-40C-18-26-16-8 0 4Z'/%3E%3Cpath d='M0 4C16-8 18-26 0-40C-18-26-16-8 0 4Z' transform='rotate(60)'/%3E%3Cpath d='M0 4C16-8 18-26 0-40C-18-26-16-8 0 4Z' transform='rotate(120)'/%3E%3Cpath d='M0 4C16-8 18-26 0-40C-18-26-16-8 0 4Z' transform='rotate(180)'/%3E%3Cpath d='M0 4C16-8 18-26 0-40C-18-26-16-8 0 4Z' transform='rotate(240)'/%3E%3Cpath d='M0 4C16-8 18-26 0-40C-18-26-16-8 0 4Z' transform='rotate(300)'/%3E%3C/g%3E%3C/svg%3E");
+
+  --lily-outline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-50 -50 100 100' fill='none' stroke='%233d1a2e' stroke-opacity='0.20' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M0 0C9-10 11-26 0-44C-11-26-9-10 0 0Z'/%3E%3Cpath d='M0 0C9-10 11-26 0-44C-11-26-9-10 0 0Z' transform='rotate(60)'/%3E%3Cpath d='M0 0C9-10 11-26 0-44C-11-26-9-10 0 0Z' transform='rotate(120)'/%3E%3Cpath d='M0 0C9-10 11-26 0-44C-11-26-9-10 0 0Z' transform='rotate(180)'/%3E%3Cpath d='M0 0C9-10 11-26 0-44C-11-26-9-10 0 0Z' transform='rotate(240)'/%3E%3Cpath d='M0 0C9-10 11-26 0-44C-11-26-9-10 0 0Z' transform='rotate(300)'/%3E%3Cpath d='M0 0L-11-17M0 0L11-17M0 0L0-21M0 0L-16-8M0 0L16-8'/%3E%3Ccircle r='5'/%3E%3C/svg%3E");
+}
+
+.lily-mark {
+  display: inline-block;
+  width: 0.86em;
+  height: 0.86em;
+  vertical-align: -0.1em;
+}
+/* the fill is applied only where masking works — otherwise the mark would
+   paint as a solid coloured square rather than a flower */
+@supports ((-webkit-mask-image: url("")) or (mask-image: url(""))) {
+  .lily-mark {
+    background: currentColor;
+    -webkit-mask: var(--lily-solid) center / contain no-repeat;
+            mask: var(--lily-solid) center / contain no-repeat;
+  }
+}
+
+/* ============================================================
+   FALLING PETALS
+   Ambient only. Built by site.js into any .petals container, so a
+   page opts in by adding one empty div. Sits behind the collage
+   objects and never takes pointer events.
+   ============================================================ */
+:root {
+  --petal: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-20 -42 40 48'%3E%3Cpath d='M0 4C16-8 18-26 0-40C-18-26-16-8 0 4Z'/%3E%3C/svg%3E");
+}
+
+.petals {
+  position: fixed;
+  inset: 0;
+  z-index: 0;            /* .pin is z-index 2, so petals drift behind */
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.petal {
+  position: absolute;
+  top: 0;
+  left: var(--x);
+  width: var(--size);
+  height: calc(var(--size) * 1.2);
+  /* the outer element only falls … */
+  animation: petalFall var(--dur) linear var(--delay) infinite;
+  will-change: transform;
+}
+.petal i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: var(--op);
+  background: linear-gradient(150deg, #f7d2dd, #dd88a8);
+  -webkit-mask: var(--petal) center / contain no-repeat;
+          mask: var(--petal) center / contain no-repeat;
+  /* … and the inner one sways and turns, so the two never fight
+     over a single transform property */
+  animation: petalSway var(--sway-dur) ease-in-out var(--delay) infinite;
+}
+
+@keyframes petalFall {
+  from { transform: translateY(-14vh); }
+  to   { transform: translateY(114vh); }
+}
+@keyframes petalSway {
+  0%   { transform: translateX(0)             rotate(0deg); }
+  50%  { transform: translateX(var(--sway))   rotate(180deg); }
+  100% { transform: translateX(0)             rotate(360deg); }
+}
+
+/* ============================================================
+   CUT-OUT OBJECTS  (pure CSS props — each can hold a photo)
+   ============================================================ */
+
+/* every object is a positioned block so its ::before/::after and tag anchor to it */
+.film, .note-obj, .notebook, .polaroid, .pressed,
+.phone, .papers, .papers .sheet, .sticky, .stamp {
+  position: relative;
+  display: block;
+  isolation: isolate;
+}
+
+/* the objects are built from <span>s inside an <a>, so blockify the parts
+   that carry box geometry (width / aspect-ratio / padding / alignment) */
+.slot, .ruled, .stamp__val,
+.sticky .hand, .sticky .sub, .phone__screen .glyph, .phone__screen .cap,
+.card__no, .card__title, .card__desc, .polaroid__cap { display: block; }
+
+/* photo slot: shows a paper placeholder until a real image loads */
+.slot {
+  position: relative;
+  overflow: hidden;
+  background:
+    var(--lily-outline) center 42% / 44% no-repeat,
+    linear-gradient(135deg, #f4e4ea 0%, #ecd3dc 52%, #e3c7d2 100%);
+}
+.slot::after {
+  content: attr(data-ph);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: end center;      /* sits under the lily watermark */
+  padding-bottom: 9px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(61, 26, 46, 0.34);
+}
+.slot img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- 1. 35mm film strip ------------------------------------ */
+.film {
+  width: 112px;
+  padding: 13px 13px;
+  background: #262220;
+  border-radius: 3px;
+  box-shadow: var(--rest);
+  display: grid;
+  gap: 8px;
+}
+.film::before, .film::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  width: 9px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #e9e4dc 0 7px,
+    transparent 7px 15px
+  );
+  border-radius: 1px;
+}
+.film::before { left: 2px; }
+.film::after  { right: 2px; }
+.film .slot { aspect-ratio: 1 / 1.16; filter: grayscale(1) contrast(1.05); }
+
+/* ---- 2. notebook + pen ------------------------------------- */
+.note-obj { width: 252px; }
+.notebook {
+  position: relative;
+  aspect-ratio: 1.28 / 1;
+  background: linear-gradient(90deg, #f6f1df 0%, #fbf8ee 48%, #f4efdd 100%);
+  border: 1px solid #d9d0b6;
+  border-radius: 4px 9px 9px 4px;
+  box-shadow: var(--rest);
+}
+.notebook::before { /* spine */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(61,26,46,0.02), rgba(61,26,46,0.16), rgba(61,26,46,0.02));
+}
+.notebook::after { /* ribbon */
+  content: "";
+  position: absolute;
+  left: 44%;
+  bottom: -16px;
+  width: 13px;
+  height: 20px;
+  background: #3a3330;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 74%, 0 100%);
+}
+.pen {
+  position: absolute;
+  right: 4px;
+  top: 12%;
+  width: 12px;
+  height: 78%;
+  transform: rotate(19deg);
+  border-radius: 6px;
+  background: linear-gradient(90deg, #cfcdca, #f4f3f1 40%, #b9b6b2);
+  box-shadow: 0 3px 7px rgba(61,26,46,0.18);
+}
+.pen::before { /* cap */
+  content: "";
+  position: absolute;
+  inset: 0 0 62% 0;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(90deg, #33302e, #6c6764 45%, #2b2827);
+}
+.pen::after { /* label */
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  top: 62%;
+  height: 15%;
+  background: #efe4b8;
+}
+
+/* ---- 3. polaroid ------------------------------------------- */
+.polaroid {
+  width: 208px;
+  padding: 11px 11px 46px;
+  background: #fffcfd;
+  border: 1px solid #f2e0e6;
+  box-shadow: var(--rest);
+}
+.polaroid .slot { aspect-ratio: 1 / 1.04; }
+.polaroid__cap {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 12px;
+  text-align: center;
+  font-family: var(--hand);
+  font-size: 22px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+/* ---- 5. phone ----------------------------------------------- */
+.phone {
+  width: 120px;
+  padding: 9px;
+  background: #262220;
+  border-radius: 20px;
+  box-shadow: var(--rest);
+}
+.phone__screen {
+  aspect-ratio: 1 / 1.85;
+  border-radius: 13px;
+  background: linear-gradient(160deg, #fffbfc, #f3dfe6);
+  display: grid;
+  place-content: center;
+  gap: 7px;
+  text-align: center;
+  padding: 10px;
+}
+.phone__screen .glyph { font-size: 22px; line-height: 1; }
+.phone__screen .cap {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-70);
+}
+.phone::before { /* notch */
+  content: "";
+  display: block;
+  width: 40px;
+  height: 4px;
+  margin: 1px auto 6px;
+  border-radius: 3px;
+  background: #4a4340;
+}
+
+/* ---- 6. paper stack + clip ---------------------------------- */
+.papers { position: relative; width: 186px; }
+.papers .sheet {
+  position: relative;
+  aspect-ratio: 1 / 1.31;
+  background: #fffcfd;
+  border: 1px solid #f0dde4;
+  border-radius: 2px;
+  box-shadow: var(--rest);
+  padding: 26px 20px;
+}
+.papers::before { /* the sheet peeking out behind */
+  content: "";
+  position: absolute;
+  inset: 8px -9px -9px 9px;
+  background: #fdf6f8;
+  border: 1px solid #f2e0e6;
+  border-radius: 2px;
+  box-shadow: var(--rest);
+}
+.papers .ruled {
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(61,26,46,0.13) 0 1px,
+    transparent 1px 15px
+  );
+}
+.papers .ruled::before { /* heading bar */
+  content: "";
+  display: block;
+  width: 58%;
+  height: 7px;
+  margin-bottom: 18px;
+  background: var(--accent);
+  opacity: 0.5;
+}
+.clip {
+  position: absolute;
+  z-index: 3;
+  top: -18px;
+  right: 30px;
+  width: 22px;
+  height: 54px;
+  border: 2.5px solid #b0ada8;
+  border-bottom-color: transparent;   /* outer loop is open at the bottom */
+  border-radius: 11px;
+  transform: rotate(8deg);
+}
+.clip::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 11px;
+  right: 5px;
+  bottom: 7px;
+  border: 2.5px solid #c6c3be;
+  border-top-color: transparent;      /* inner loop is open at the top */
+  border-radius: 8px;
+}
+
+/* ---- 7. sticky note ----------------------------------------- */
+.sticky {
+  width: 156px;
+  aspect-ratio: 1 / 0.94;
+  padding: 18px 14px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  background: linear-gradient(170deg, #fdf3c8, #f7e7a4);
+  box-shadow: var(--rest);
+  clip-path: polygon(0 0, 100% 0, 100% 86%, 86% 100%, 0 100%);
+}
+.sticky .hand { font-size: 27px; line-height: 1.1; }
+.sticky .sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(61, 26, 46, 0.55);
+  margin-top: 4px;
+}
+
+/* ---- 8. stamp ----------------------------------------------- */
+.stamp {
+  width: 122px;
+  padding: 8px;
+  background: #fffcfd;
+  box-shadow: var(--rest);
+  border: 1px dashed rgba(61, 26, 46, 0.22);
+  outline: 4px solid #fffcfd;
+}
+.stamp .slot { aspect-ratio: 1 / 1.18; }
+.stamp__val {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 6px;
+  color: var(--ink-70);
+}
+
+/* ---- 9. pressed lily, taped down ---------------------------- */
+.pressed {
+  position: relative;
+  display: block;
+  isolation: isolate;
+  width: 196px;
+  padding: 22px 16px 14px;
+  background: linear-gradient(168deg, #fffcfd, #fbf1f4);
+  border: 1px solid #f0dde4;
+  box-shadow: var(--rest);
+}
+.pressed__lily { display: block; }
+.pressed__lily svg { width: 100%; height: auto; display: block; }
+
+.pressed__label {
+  display: block;
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(61, 26, 46, 0.12);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: var(--ink-70);
+}
+.pressed__label em {
+  display: block;
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-45);
+}
+
+/* two strips of washi tape holding it to the page */
+.pressed__tape {
+  position: absolute;
+  z-index: 2;
+  width: 62px;
+  height: 20px;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(255, 255, 255, 0.34) 0 5px, rgba(255, 255, 255, 0) 5px 10px),
+    rgba(224, 150, 172, 0.42);
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 1px 3px rgba(61, 26, 46, 0.1);
+}
+/* both strips lie on the same diagonal, clipping opposite corners */
+.pressed__tape--a { top: -9px;    left: -17px;  transform: rotate(-38deg); }
+.pressed__tape--b { bottom: -9px; right: -17px; transform: rotate(-38deg); }
+
+/* ============================================================
+   HERBARIUM SPECIMEN CARDS  (interests page)
+   ============================================================ */
+.spec {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  padding: 28px 18px 22px;
+  text-align: center;
+  background: linear-gradient(170deg, #fffcfd, #fdf4f6);
+  border: 1px solid #f0dde4;
+  box-shadow: var(--rest);
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+}
+.spec:hover { transform: rotate(0deg) translateY(-6px); box-shadow: var(--lift); }
+
+/* the punched hole and its thread */
+.spec__hole {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  margin-left: -4.5px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px rgba(61, 26, 46, 0.22);
+}
+
+.spec__lily { display: block; width: 62px; margin: 6px auto 12px; }
+.spec__lily svg { width: 100%; height: auto; display: block; }
+
+.spec__no {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.spec__name {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 3px;
+}
+.spec__latin {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-style: italic;
+  color: var(--ink-45);
+  margin-top: 1px;
+}
+.spec__note {
+  font-size: 13px;
+  color: var(--ink-70);
+  margin-top: 9px;
+}
+
+/* ============================================================
+   CARD GRIDS (work / interests / stills)
+   ============================================================ */
+/* flex, not grid, so a short final row stays centred */
+.scatter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 54px 46px;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+.scatter > * { flex: 0 0 300px; }
+.scatter > :nth-child(3n+2) { margin-top: 26px; }
+.scatter > :nth-child(3n+3) { margin-top: 12px; }
+
+/* specimen tags are a touch narrower than the picture cards */
+.scatter--spec > * { flex: 0 0 260px; }
+
+/* two-up variant (the four work cards read better as a 2 x 2) */
+.scatter--two { max-width: 700px; }
+.scatter--two > :nth-child(3n+2),
+.scatter--two > :nth-child(3n+3) { margin-top: 0; }
+.scatter--two > :nth-child(even) { margin-top: 28px; }
+
+.card {
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.45s var(--ease);
+}
+.card:hover { transform: rotate(0deg) translateY(-6px); }
+
+.card__frame {
+  padding: 11px 11px 14px;
+  background: #fffcfd;
+  border: 1px solid #f2e0e6;
+  box-shadow: var(--rest);
+  transition: box-shadow 0.45s var(--ease);
+}
+.card:hover .card__frame { box-shadow: var(--lift); }
+.card__frame .slot { aspect-ratio: 1 / 0.78; }
+
+.card__no {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: var(--accent);
+  margin-top: 16px;
+}
+.card__title {
+  font-family: var(--mono);
+  font-size: 20px;
+  line-height: 1.25;
+  margin-top: 4px;
+}
+.card__desc {
+  font-size: 13px;
+  color: var(--ink-70);
+  margin: 6px auto 0;
+  max-width: 300px;
+}
+
+/* stills grid */
+.stills {
+  columns: 3;
+  column-gap: 34px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.stills .shot {
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 34px;
+  padding: 10px 10px 40px;
+  background: #fffcfd;
+  border: 1px solid #f2e0e6;
+  box-shadow: var(--rest);
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+}
+.stills .shot:hover { transform: rotate(0deg) scale(1.02); box-shadow: var(--lift); }
+.stills .shot .slot { aspect-ratio: var(--ar, 1 / 1.2); }
+.stills .shot .cap {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 11px;
+  text-align: center;
+  font-family: var(--hand);
+  font-size: 21px;
+}
+
+/* ============================================================
+   ABOUT — draggable photo notes over a column of text
+   ============================================================ */
+.about-wrap { position: relative; max-width: 1160px; margin: 0 auto; min-height: 760px; }
+
+.prose {
+  max-width: 560px;
+  margin: 0 auto;
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--ink);
+}
+.prose p { margin-bottom: 18px; }
+.prose .lead {
+  font-family: var(--mono);
+  font-size: 20px;
+  line-height: 1.4;
+  margin-bottom: 22px;
+}
+.prose em { color: var(--accent); font-style: italic; }
+.prose .sign {
+  font-family: var(--hand);
+  font-size: 32px;
+  line-height: 1.15;
+  margin-top: 26px;
+}
+
+.drag-hint {
+  text-align: center;
+  margin-top: 46px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-45);
+}
+
+.float {
+  position: absolute;
+  z-index: 4;
+  cursor: grab;
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+  touch-action: none;
+}
+.float:hover { transform: rotate(calc(var(--rot, 0deg) * 0.3)) scale(1.03); }
+.float.is-dragging { transition: none; cursor: grabbing; z-index: 20; }
+
+/* ============================================================
+   QUOTE BANNER
+   ============================================================ */
+.quote {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 44px 24px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.quote p {
+  font-family: var(--mono);
+  font-size: clamp(19px, 2.6vw, 26px);
+  line-height: 1.5;
+}
+.quote em { color: var(--accent); font-style: italic; }
+.quote .by {
+  margin-top: 16px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-45);
+}
+
+/* ============================================================
+   PROFESSIONAL / RESUME
+   ============================================================ */
+.res { max-width: 620px; margin: 0 auto; }
+.res__lead {
+  font-family: var(--mono);
+  font-size: 21px;
+  line-height: 1.45;
+  text-align: center;
+}
+.res__intro {
+  margin: 14px auto 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink-70);
+}
+.res__block { margin-top: 40px; }
+.res__h {
+  font-family: var(--mono);
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.res__block p { font-size: 14px; color: var(--ink-70); margin-bottom: 12px; }
+.res__block a { color: var(--accent); border-bottom: 1px solid rgba(207,99,130,0.4); }
+
+.pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 auto;
+  padding: 9px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 12px;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.pdf-link:hover { border-color: var(--accent); color: var(--accent); }
+.center { display: flex; justify-content: center; }
+
+/* ============================================================
+   SOCIALS
+   ============================================================ */
+.social-list {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
+.social-list a {
+  padding: 11px 24px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 13px;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.social-list a:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+.scroll-cue {
+  text-align: center;
+  margin-top: 64px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-45);
+}
+
+.board {
+  position: relative;
+  height: 520px;
+  max-width: 1060px;
+  margin: 22px auto 0;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 22% 28%, rgba(207,99,130,0.05), transparent 55%),
+    radial-gradient(circle at 78% 72%, rgba(61,26,46,0.04), transparent 55%);
+}
+
+/* ============================================================
+   CONTACT FORM
+   ============================================================ */
+.form { max-width: 460px; margin: 30px auto 0; display: grid; gap: 22px; }
+.form input, .form textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  padding: 9px 2px;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--ink);
+  transition: border-color 0.3s var(--ease);
+}
+.form input:focus, .form textarea:focus { outline: none; border-bottom-color: var(--accent); }
+.form textarea { resize: vertical; min-height: 96px; }
+.form label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-45);
+}
+.form button {
+  justify-self: start;
+  padding: 12px 28px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+.form button:hover { background: var(--ink); color: #fff; }
+
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
+/* only hide when scripting is on (the <head> sets .js) — otherwise the
+   content would be permanently invisible if JS is off or errors out */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+.js .reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .js .reveal { opacity: 1; transform: none; }
+  .petals { display: none; }   /* purely decorative — drop it entirely */
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+/* Below the width the absolute collage needs, it becomes a scrapbook column.
+   (A transform: scale() would not work here — it shrinks the paint, not the
+   layout box, so the 1040px stage would still push the page sideways.) */
+@media (max-width: 1080px) {
+  .home { display: block; padding: 48px 24px 64px; }
+  .stage {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    transform: none;
+    display: grid;
+    /* minmax(0,…) so a fixed-width object can never widen the page */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+    align-items: start;
+    gap: 64px 20px;
+  }
+  .signature, .tagline {
+    position: static;
+    transform: none;
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+  .signature { font-size: clamp(38px, 7vw, 66px); margin-bottom: 4px; }
+  .tagline { font-size: 17px; margin-bottom: 18px; white-space: normal; }
+  .pin {
+    position: static !important;
+    /* ease off the tilt: the label is always shown here, and a steep angle
+       swings it out from under its object */
+    transform: rotate(calc(var(--rot, 0deg) * 0.4));
+    max-width: 100%;
+  }
+  .pin:hover, .pin:focus-visible {
+    transform: rotate(calc(var(--rot, 0deg) * 0.4)) scale(1.03);
+  }
+  .pin__tag {
+    opacity: 1;
+    top: 100%;
+    bottom: auto;
+    margin-top: 12px;
+    font-size: 20px;
+    /* counter-rotate so the label sits level under the tilted object */
+    transform: translateX(-50%) rotate(calc(var(--rot, 0deg) * -0.4));
+  }
+}
+
+@media (max-width: 860px) {
+  .stage { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 58px 18px; }
+  .scatter { gap: 44px 28px; }
+  .scatter > * { flex: 0 0 260px; margin-top: 0 !important; }
+  .stills { columns: 2; }
+  .nav { padding: 24px 22px 0; }
+  .nav__links { gap: 16px; }
+  .nav a { font-size: 13px; }
+  .page { padding: 44px 22px 30px; }
+  .foot { padding: 26px 22px 34px; }
+  /* photos stop floating and become a 2-up grid under the text */
+  .about-wrap {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 18px;
+    align-items: start;
+  }
+  .prose { grid-column: 1 / -1; }
+  .float {
+    position: static !important;
+    left: auto !important; top: auto !important; right: auto !important;
+    width: 100% !important;   /* inline width:200px would not fill the column */
+    max-width: 220px;
+    margin: 0;
+    justify-self: center;
+  }
+  .float .polaroid { width: 100%; }
+}
+
+@media (max-width: 720px) {
+  .home { padding: 40px 18px 56px; }
+  .stage { gap: 52px 14px; }
+  .signature { font-size: clamp(32px, 11vw, 46px); }
+  .tagline { font-size: 15px; margin-bottom: 12px; }
+  .pin__tag { bottom: -24px; font-size: 19px; }
+
+  /* shrink the objects themselves — transforms don't change layout size */
+  .film     { width: 84px; }
+  .note-obj { width: 148px; }
+  .polaroid { width: 138px; }
+  .phone    { width: 92px; }
+  .papers   { width: 124px; }
+  .sticky   { width: 118px; }
+  .stamp    { width: 96px; }
+  .pressed  { width: 152px; padding: 18px 12px 11px; }
+  .polaroid__cap { font-size: 17px; }
+
+  .stills { columns: 1; }
+  .scatter > * { flex: 1 1 100%; max-width: 320px; }
+  .foot { flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+  .form input, .form textarea { font-size: 16px; }  /* stop iOS zoom */
+  .board { height: 620px; }
+}
+
+@media (max-width: 560px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .nav__links { gap: 14px; }
+
+  /* a rotated box is wider than its element, which overflows a narrow
+     column — so trim the widest objects (tilt is already eased above) */
+  .film     { width: 72px; }
+  .note-obj { width: 130px; }
+  .pressed  { width: 138px; }
+  .polaroid { width: 128px; }
+  .sticky   { width: 108px; }
+  .papers   { width: 112px; }
+  .pin__tag { font-size: 17px; bottom: -22px; }
+}

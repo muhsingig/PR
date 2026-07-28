@@ -1,0 +1,9 @@
+Drop your photos in this folder:
+
+  portrait.jpg           face or half-body shot
+  life1.jpg … life4.jpg  casual personal photos
+  work1.jpg … work4.jpg  work / project shots
+
+Until a file exists, the site shows a lily watermark placeholder in its slot.
+This file only exists so git keeps the empty folder — you can delete it once
+your photos are in.
